@@ -299,18 +299,18 @@ try {
   const tools = await client.listTools();
   assert(tools.tools.some((tool) => tool.name === "vf_search"), "MCP vf_search tool missing.");
   const resourceUris = [
-    "KnowledgeForge://health",
-    "KnowledgeForge://collections",
-    "KnowledgeForge://collections/smoke/documents",
-    "KnowledgeForge://embedding-provider/status",
-    "KnowledgeForge://jobs/recent",
-    "KnowledgeForge://anythingllm/sync-status",
-    "KnowledgeForge://documents/quality",
+    "knowledgeforge://health",
+    "knowledgeforge://collections",
+    "knowledgeforge://collections/smoke/documents",
+    "knowledgeforge://embedding-provider/status",
+    "knowledgeforge://jobs/recent",
+    "knowledgeforge://anythingllm/sync-status",
+    "knowledgeforge://documents/quality",
   ];
   const listedResources = await client.listResources();
   const listedResourceJson = JSON.stringify(listedResources.resources);
-  assert(listedResourceJson.includes("KnowledgeForge://health"), "MCP health resource missing from listResources.");
-  assert(listedResourceJson.includes("KnowledgeForge://embedding-provider/status"), "MCP embedding status resource missing from listResources.");
+  assert(listedResourceJson.includes("knowledgeforge://health"), "MCP health resource missing from listResources.");
+  assert(listedResourceJson.includes("knowledgeforge://embedding-provider/status"), "MCP embedding status resource missing from listResources.");
   const readResources = [];
   for (const uri of resourceUris) {
     const resource = await client.readResource({ uri });

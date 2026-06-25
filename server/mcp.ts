@@ -681,7 +681,7 @@ async function documentQualityOverview() {
 function registerResources(server: McpServer) {
   server.registerResource(
     "vf_health",
-    "KnowledgeForge://health",
+    "knowledgeforge://health",
     {
       title: "Knowledge Forge Health",
       description: "API health, app version, configured embedding provider, and LanceDB tables.",
@@ -692,7 +692,7 @@ function registerResources(server: McpServer) {
 
   server.registerResource(
     "vf_collections",
-    "KnowledgeForge://collections",
+    "knowledgeforge://collections",
     {
       title: "Knowledge Forge Collections",
       description: "All local vector collections.",
@@ -703,7 +703,7 @@ function registerResources(server: McpServer) {
 
   server.registerResource(
     "vf_collection_documents",
-    new ResourceTemplate("KnowledgeForge://collections/{slug}/documents", { list: undefined }),
+    new ResourceTemplate("knowledgeforge://collections/{slug}/documents", { list: undefined }),
     {
       title: "Knowledge Forge Collection Documents",
       description: "Documents indexed into one collection.",
@@ -717,7 +717,7 @@ function registerResources(server: McpServer) {
 
   server.registerResource(
     "vf_embedding_provider_status",
-    "KnowledgeForge://embedding-provider/status",
+    "knowledgeforge://embedding-provider/status",
     {
       title: "Knowledge Forge Embedding Provider Status",
       description: "Current embedding provider configuration and per-collection embedding/index compatibility status.",
@@ -728,7 +728,7 @@ function registerResources(server: McpServer) {
 
   server.registerResource(
     "vf_recent_jobs",
-    "KnowledgeForge://jobs/recent",
+    "knowledgeforge://jobs/recent",
     {
       title: "Knowledge Forge Recent Jobs",
       description: "Recent local upload and reprocess jobs with status, phase, and progress.",
@@ -739,7 +739,7 @@ function registerResources(server: McpServer) {
 
   server.registerResource(
     "vf_anythingllm_sync_status",
-    "KnowledgeForge://anythingllm/sync-status",
+    "knowledgeforge://anythingllm/sync-status",
     {
       title: "Knowledge Forge AnythingLLM Sync Status",
       description: "Local AnythingLLM sync configuration and recorded per-collection sync metadata without contacting AnythingLLM.",
@@ -750,7 +750,7 @@ function registerResources(server: McpServer) {
 
   server.registerResource(
     "vf_document_quality_overview",
-    "KnowledgeForge://documents/quality",
+    "knowledgeforge://documents/quality",
     {
       title: "Knowledge Forge OCR and Document Quality",
       description: "OCR configuration, parser coverage, warnings, failures, low-confidence OCR, and document quality overview.",

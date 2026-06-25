@@ -554,13 +554,13 @@ type PendingProcessingAction = {
 
 const supportedFormats = ".txt,.md,.markdown,.json,.html,.htm,.csv,.tsv,.xml,.log,.yaml,.yml,.pdf,.docx,.pptx,.xlsx,.xls,.png,.jpg,.jpeg,.webp,.tif,.tiff,.bmp";
 const mcpResourceCatalog = [
-  { uri: "KnowledgeForge://health", label: "Health", description: "API 健康、版本、LanceDB 和脱敏配置摘要。" },
-  { uri: "KnowledgeForge://collections", label: "Collections", description: "本地知识库列表。" },
-  { uri: "KnowledgeForge://collections/{slug}/documents", label: "Collection Documents", description: "指定知识库文档列表，使用实际 slug 替换占位符。" },
-  { uri: "KnowledgeForge://embedding-provider/status", label: "Embedding Status", description: "当前 embedding provider 与各知识库索引兼容状态。" },
-  { uri: "KnowledgeForge://jobs/recent", label: "Recent Jobs", description: "最近导入、OCR、embedding 和重处理任务。" },
-  { uri: "KnowledgeForge://anythingllm/sync-status", label: "AnythingLLM Sync", description: "本地记录的 AnythingLLM 同步状态，不主动访问远端。" },
-  { uri: "KnowledgeForge://documents/quality", label: "Document Quality", description: "OCR/解析质量、失败、警告和低置信度概览。" },
+  { uri: "knowledgeforge://health", label: "Health", description: "API 健康、版本、LanceDB 和脱敏配置摘要。" },
+  { uri: "knowledgeforge://collections", label: "Collections", description: "本地知识库列表。" },
+  { uri: "knowledgeforge://collections/{slug}/documents", label: "Collection Documents", description: "指定知识库文档列表，使用实际 slug 替换占位符。" },
+  { uri: "knowledgeforge://embedding-provider/status", label: "Embedding Status", description: "当前 embedding provider 与各知识库索引兼容状态。" },
+  { uri: "knowledgeforge://jobs/recent", label: "Recent Jobs", description: "最近导入、OCR、embedding 和重处理任务。" },
+  { uri: "knowledgeforge://anythingllm/sync-status", label: "AnythingLLM Sync", description: "本地记录的 AnythingLLM 同步状态，不主动访问远端。" },
+  { uri: "knowledgeforge://documents/quality", label: "Document Quality", description: "OCR/解析质量、失败、警告和低置信度概览。" },
 ];
 
 const parserLabel: Record<string, string> = {
