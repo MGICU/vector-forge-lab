@@ -903,8 +903,8 @@ async function runUiSmoke(url) {
   if (
     !mcpResourceUiState.ok
     || mcpResourceUiState.rows !== 7
-    || !mcpResourceUiState.text.includes("KnowledgeForge://embedding-provider/status")
-    || !mcpResourceUiState.text.includes("KnowledgeForge://anythingllm/sync-status")
+    || !mcpResourceUiState.text.includes("knowledgeforge://embedding-provider/status")
+    || !mcpResourceUiState.text.includes("knowledgeforge://anythingllm/sync-status")
   ) {
     throw new Error(`MCP resource UI coverage failed: ${JSON.stringify(mcpResourceUiState)}`);
   }
