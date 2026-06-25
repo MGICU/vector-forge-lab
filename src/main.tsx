@@ -7,6 +7,7 @@ import {
   Clock3,
   Clipboard,
   Database,
+  Eraser,
   Eye,
   FileText,
   FolderPlus,
@@ -737,6 +738,7 @@ function App() {
   const [cancellingJobId, setCancellingJobId] = React.useState("");
   const [toast, setToast] = React.useState<Toast | null>(null);
   const [activeSection, setActiveSection] = React.useState<SectionId>("search");
+  const [shortcutsPanelOpen, setShortcutsPanelOpen] = React.useState(false);
   const [documentDetail, setDocumentDetail] = React.useState<DocumentDetailPayload | null>(null);
   const [documentText, setDocumentText] = React.useState<DocumentTextPayload | null>(null);
   const [pendingDeleteDocument, setPendingDeleteDocument] = React.useState<DocumentRecord | null>(null);
@@ -759,6 +761,7 @@ function App() {
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
   const aiFileInputRef = React.useRef<HTMLInputElement | null>(null);
   const didBootRef = React.useRef(false);
+  const searchInputRef = React.useRef<HTMLInputElement | null>(null);
 
   const activeCollection = React.useMemo(
     () => collections.find((collection) => collection.slug === activeSlug) ?? collections[0] ?? null,
@@ -1040,6 +1043,42 @@ function App() {
     }, 3000);
     return () => window.clearInterval(timer);
   }, [activeSlug, refreshDocumentState, runningJobs.length]);
+
+  // Keyboard shortcuts
+  React.useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      const tgt = event.target as HTMLElement;
+      const inp = tgt.tagName === "INPUT" || tgt.tagName === "TEXTAREA" || tgt.tagName === "SELECT" || tgt.isContentEditable;
+      if (event.ctrlKey && event.key === "k" && !event.shiftKey) {
+        event.preventDefault();
+        setActiveSection("search");
+        setTimeout(() => searchInputRef.current?.focus(), 80);
+        return;
+      }
+      if (event.ctrlKey && event.shiftKey && (event.key === "I" || event.key === "i")) {
+        event.preventDefault();
+        openImportPicker();
+        return;
+      }
+      if (event.key === "Escape") {
+        if (shortcutsPanelOpen) { setShortcutsPanelOpen(false); return; }
+        if (documentDetail) { setDocumentDetail(null); setDocumentText(null); return; }
+        if (pendingBatchDeleteIds.length) { setPendingBatchDeleteIds([]); setBatchDeleteConfirmation(""); return; }
+        if (pendingDeleteDocument) { setPendingDeleteDocument(null); setDeleteConfirmation(""); return; }
+        if (showCreateCollectionDialog) { setShowCreateCollectionDialog(false); setNewCollectionName(""); return; }
+        if (showQualityReport) { setShowQualityReport(false); return; }
+        if (inp) { tgt.blur(); return; }
+        setDocumentsSelectionResetKey((k) => k + 1);
+        return;
+      }
+      if (event.key === "?" && !inp) {
+        event.preventDefault();
+        setShortcutsPanelOpen((v) => !v);
+      }
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [shortcutsPanelOpen, documentDetail, pendingBatchDeleteIds, pendingDeleteDocument, showCreateCollectionDialog, showQualityReport]);
 
   function patchConfig(updater: (draft: AppConfig) => AppConfig) {
     setConfig((current) => (current ? updater(current) : current));
@@ -2861,6 +2900,7 @@ function App() {
             onRetryAnythingCleanupQueue={(ids) => requestCleanupQueueRetry(ids)}
             onCancelJob={(jobId) => void cancelJob(jobId)}
             cancellingJobId={cancellingJobId}
+            onNavigate={(section) => setActiveSection(section as SectionId)}
           />
           )}
         </div>
@@ -3009,6 +3049,43 @@ function App() {
         onConfirm={() => void confirmPendingProcessingAction()}
       />
       {toast && <ToastView toast={toast} />}
+      {shortcutsPanelOpen && (
+        <div className="modal-overlay" onClick={() => setShortcutsPanelOpen(false)} data-testid="shortcuts-modal">
+          <div className="modal-content" style={{ maxWidth: 480 }} onClick={(e) => e.stopPropagation()}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+              <h2 style={{ margin: 0 }}>???</h2>
+              <button className="button" onClick={() => setShortcutsPanelOpen(false)}><X size={18} /></button>
+            </div>
+            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <thead>
+                <tr style={{ borderBottom: "2px solid #e2e8f0", textAlign: "left" }}>
+                  <th style={{ padding: "8px 12px", fontSize: "0.8rem", color: "#5a6988" }}>??</th>
+                  <th style={{ padding: "8px 12px", fontSize: "0.8rem", color: "#5a6988" }}>??</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
+                  <td style={{ padding: "10px 12px" }}><kbd style={{ padding: "2px 8px", background: "#f1f5f9", borderRadius: 4, fontSize: "0.78rem", fontFamily: "monospace" }}>Ctrl + K</kbd></td>
+                  <td style={{ padding: "10px 12px", fontSize: "0.85rem" }}>?????????</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
+                  <td style={{ padding: "10px 12px" }}><kbd style={{ padding: "2px 8px", background: "#f1f5f9", borderRadius: 4, fontSize: "0.78rem", fontFamily: "monospace" }}>Ctrl + Shift + I</kbd></td>
+                  <td style={{ padding: "10px 12px", fontSize: "0.85rem" }}>?????????</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
+                  <td style={{ padding: "10px 12px" }}><kbd style={{ padding: "2px 8px", background: "#f1f5f9", borderRadius: 4, fontSize: "0.78rem", fontFamily: "monospace" }}>Esc</kbd></td>
+                  <td style={{ padding: "10px 12px", fontSize: "0.85rem" }}>?????? / ??????</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
+                  <td style={{ padding: "10px 12px" }}><kbd style={{ padding: "2px 8px", background: "#f1f5f9", borderRadius: 4, fontSize: "0.78rem", fontFamily: "monospace" }}>?</kbd></td>
+                  <td style={{ padding: "10px 12px", fontSize: "0.85rem" }}>?? / ????????</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style={{ fontSize: "0.75rem", color: "#8499b8", marginTop: 12 }}>??????????????????</p>
+          </div>
+        </div>
+      )}
       {showQualityReport && qualityReport && (
         <div className="modal-overlay" onClick={() => setShowQualityReport(false)}>
           <div className="modal-content" style={{ maxWidth: 720, maxHeight: "80vh", overflow: "auto" }} onClick={(e) => e.stopPropagation()}>
@@ -3315,6 +3392,16 @@ function AiControlPanel(props: {
           >
             {props.busy === "ai-policy" ? <Loader2 className="spin" size={13} /> : <ShieldCheck size={13} />}
             安全预检
+          </button>
+          <button
+            className="mini-action"
+            type="button"
+            onClick={() => { props.onInput(""); }}
+            disabled={isBusy || !props.messages.length}
+            title="??????"
+          >
+            <Eraser size={13} />
+            ??
           </button>
           <Pill tone={props.activeCollection ? "active" : "warn"}>{props.activeCollection ? "本地指令路由" : "先选知识库"}</Pill>
         </div>
@@ -5159,6 +5246,7 @@ function ConfigInspector(props: {
   onRetryAnythingCleanupQueue: (ids?: string[]) => void;
   onCancelJob: (jobId: string) => void;
   cancellingJobId: string;
+  onNavigate: (section: string) => void;
 }) {
   const config = props.config;
   const controlsDisabled = Boolean(props.busy);
@@ -5275,6 +5363,9 @@ function ConfigInspector(props: {
                 </button>
                 <button className="mini-action" type="button" onClick={props.onApplyDefault} disabled={Boolean(props.busy)}>
                   <RotateCcw size={14} /> 应用默认到当前
+                </button>
+                <button className="mini-action invert" type="button" onClick={() => props.onNavigate("settings")} disabled={Boolean(props.busy)}>
+                  <Settings size={14} /> 修改参数
                 </button>
               </div>
             </section>

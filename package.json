@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "knowledge-forge",
   "private": true,
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Local knowledge base, vector search, OCR, MCP, and optional AnythingLLM desktop integration.",
   "keywords": [
     "local-first",
@@ -123,6 +123,7 @@
     "@lancedb/lancedb": "^0.30.0",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "@napi-rs/canvas": "^1.0.0",
+    "@playwright/test": "^1.61.1",
     "@vitejs/plugin-react": "^6.0.1",
     "apache-arrow": "^18.1.0",
     "concurrently": "^10.0.3",

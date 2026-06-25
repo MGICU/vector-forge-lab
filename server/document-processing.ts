@@ -7,9 +7,6 @@ import mammoth from "mammoth";
 import { PDFParse } from "pdf-parse";
 import Tesseract from "tesseract.js";
 
-declare module "pptx2json" {
-  export function parseAsync(buf: Buffer): Promise<{ slides: Array<{ shapes?: Array<{ text?: string }> }> }>;
-}
 
 export type DuplicateStrategy = "skip" | "version" | "replace";
 export type OcrMode = "auto" | "tesseract" | "paddleocr" | "cloud";

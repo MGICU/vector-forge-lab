@@ -49,6 +49,8 @@ select:focus-visible,
 textarea:focus-visible {
   outline: 3px solid rgba(37, 99, 235, 0.2);
   outline-offset: 2px;
+  transition: outline 0.15s ease, outline-offset 0.15s ease;
+  transition: outline 0.15s ease, outline-offset 0.15s ease;
 }
 
 input,
@@ -131,7 +133,8 @@ textarea {
   font-size: 18px;
   line-height: 1.2;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .brand-copy span,
@@ -180,6 +183,18 @@ textarea {
   font-weight: 650;
   padding: 0 14px;
   text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.side-nav button:not(.active):hover {
+  background: #f0f3f8;
+  color: #101828;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.side-nav button:not(.active):hover {
+  background: #f0f3f8;
+  color: #101828;
 }
 
 .side-nav button.active {
@@ -228,7 +243,8 @@ textarea {
   overflow: hidden;
   margin: 0;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .pill-row,
@@ -323,6 +339,10 @@ textarea {
   align-content: start;
   gap: 24px;
   padding: 28px 46px 58px 34px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .topbar {
@@ -364,7 +384,11 @@ textarea {
   border: 1px solid #dfe6ef;
   border-radius: 14px;
   background: #fff;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 4px 12px rgba(15, 23, 42, 0.04),
+    0 8px 24px rgba(15, 23, 42, 0.04);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .metric-card {
@@ -558,7 +582,8 @@ textarea {
   font-size: 12px;
   line-height: 1.35;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .ai-policy-strip {
@@ -878,7 +903,8 @@ textarea {
   font-size: 12px;
   font-weight: 720;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .ai-file-chip small {
@@ -1041,7 +1067,8 @@ textarea {
   color: #172033;
   font-size: 12px;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .result-row span,
@@ -1054,7 +1081,8 @@ textarea {
   font-size: 11px;
   line-height: 1.35;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .result-row p {
@@ -1129,7 +1157,8 @@ textarea {
   color: #172033;
   font-size: 12px;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .detail-alert {
@@ -1225,7 +1254,8 @@ textarea {
   overflow: hidden;
   margin: 0;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .chunk-row strong {
@@ -1292,7 +1322,8 @@ textarea {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .delete-target-list span {
@@ -1401,7 +1432,8 @@ textarea {
   font-size: 13px;
   font-weight: 800;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .dialog-actions {
@@ -1520,7 +1552,8 @@ textarea {
   font-size: 12px;
   font-weight: 760;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .doc-selection-summary {
@@ -1531,7 +1564,8 @@ textarea {
   font-weight: 760;
   line-height: 1.35;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .doc-select {
@@ -1907,7 +1941,8 @@ textarea {
   font-size: 12px;
   font-weight: 800;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .cleanup-entry-main p {
@@ -1984,7 +2019,8 @@ textarea {
   font-weight: 760;
   padding: 7px 9px;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .mini-action {
@@ -2085,7 +2121,8 @@ textarea {
   color: #bac4d3;
   font-size: 11px;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .progress-track {
@@ -2648,7 +2685,7 @@ textarea {
    ═══════════════════════════════════════════════ */
 
 .button {
-  transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+  transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
 .button:not(:disabled):active {
@@ -2656,7 +2693,8 @@ textarea {
 }
 
 .button:not(:disabled):hover {
-  filter: brightness(1.06);
+  transform: scale(1.02);
+  filter: brightness(1.04);
 }
 
 .button.primary:not(:disabled):hover {

@@ -1,3 +1,10 @@
+## 0.3.2 - 2026-06-25
+
+- Added keyboard shortcuts modal: press `?` to view all shortcuts (Ctrl+K search, Ctrl+Shift+I import, Esc close, ? toggle panel).
+- Added "Clear" chat button in AI Control panel to clear the conversation history.
+- Added "????" button on Collections config summary to jump directly to Settings for detailed parameter editing.
+- Added `Eraser` icon to lucide-react imports for the AI clear chat feature.
+
 ﻿# Changelog
 
 ## 0.3.1 - 2026-06-25
