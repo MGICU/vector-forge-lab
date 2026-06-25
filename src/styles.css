@@ -3040,3 +3040,24 @@ textarea {
   font-size: 0.82rem;
   padding: 6px 10px;
 }
+
+.shortcut-hint {
+  padding: 8px 12px;
+  font-size: 0.72rem;
+  color: #8499b8;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.shortcut-hint kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 3px;
+  font-size: 0.68rem;
+  font-family: monospace;
+  color: #475569;
+}

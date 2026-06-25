@@ -3233,6 +3233,9 @@ function Sidebar(props: {
           </button>
         </div>
       </section>
+      <div className="shortcut-hint">
+        <kbd>?</kbd> ???
+      </div>
     </aside>
   );
 }
