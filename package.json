@@ -1,0 +1,168 @@
+{
+  "name": "vector-forge-lab",
+  "private": true,
+  "version": "0.3.1",
+  "description": "Local knowledge base, vector search, OCR, MCP, and optional AnythingLLM desktop integration.",
+  "keywords": [
+    "local-first",
+    "knowledge-base",
+    "rag",
+    "vector-search",
+    "lancedb",
+    "ocr",
+    "mcp",
+    "anythingllm",
+    "electron",
+    "desktop-ai"
+  ],
+  "author": "Vector Forge",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "concurrently -n api,ui -c cyan,green \"npm:server\" \"npm:ui\"",
+    "ui": "vite --host 127.0.0.1 --port 5184",
+    "server": "tsx watch server/index.ts",
+    "server:once": "tsx server/index.ts",
+    "desktop": "npm run build && electron .",
+    "smoke:desktop": "npm run build && npm run smoke:desktop:built",
+    "smoke:desktop:built": "node electron/smoke.cjs",
+    "smoke:desktop:data-dir": "npm run build && npm run smoke:desktop:data-dir:built",
+    "smoke:desktop:data-dir:built": "node electron/smoke-data-dir.cjs",
+    "smoke:desktop:packaged": "node electron/smoke-packaged.cjs",
+    "smoke:ui": "npm run build && npm run smoke:ui:built",
+    "smoke:ui:built": "node electron/smoke-ui.cjs",
+    "pack:win": "npm run build && electron-builder --win --dir",
+    "dist:win": "npm run build && npm run dist:win:built",
+    "dist:win:built": "electron-builder --win nsis portable zip",
+    "build": "tsc -b && vite build && npm run build:server",
+    "build:server": "tsc -p tsconfig.server.json",
+    "lint": "eslint .",
+    "mcp": "tsx server/mcp.ts",
+    "smoke": "tsx server/smoke.ts",
+    "smoke:persistence": "tsx server/persistence-smoke.ts",
+    "smoke:upload": "tsx server/upload-smoke.ts",
+    "smoke:documents": "tsx server/document-smoke.ts",
+    "smoke:directory": "tsx server/directory-smoke.ts",
+    "smoke:onboarding": "tsx server/onboarding-smoke.ts",
+    "smoke:anythingllm": "tsx server/anythingllm-sync-smoke.ts",
+    "smoke:anythingllm-desktop": "tsx server/anythingllm-desktop-smoke.ts",
+    "smoke:ai-tools": "tsx server/ai-tools-policy-smoke.ts",
+    "smoke:local-action-token": "tsx server/local-action-token-smoke.ts",
+    "smoke:mcp:writes": "tsx server/mcp-write-smoke.ts",
+    "smoke:embedding-provider": "tsx server/embedding-provider-smoke.ts",
+    "smoke:buttons": "tsx server/button-audit-smoke.ts",
+    "smoke:jobs": "tsx server/job-cancel-retry-smoke.ts",
+    "smoke:formats": "npm run smoke:documents",
+    "smoke:ocr": "tsx server/ocr-smoke.ts",
+    "smoke:ocr:real": "tsx server/ocr-real-smoke.ts",
+    "smoke:release:artifacts": "tsx server/release-artifacts-smoke.ts",
+    "smoke:security": "tsx server/security-smoke.ts",
+    "smoke:release": "npm run lint && npm run build && npm run smoke:buttons && npm run smoke && npm run smoke:persistence && npm run smoke:upload && npm run smoke:documents && npm run smoke:directory && npm run smoke:onboarding && npm run smoke:ocr && npm run smoke:security && npm run smoke:ai-tools && npm run smoke:local-action-token && npm run smoke:mcp:writes && npm run smoke:embedding-provider && npm run smoke:anythingllm && npm run smoke:anythingllm-desktop && npm run smoke:jobs && npm run smoke:ui:built && npm run smoke:desktop:data-dir:built && npm run smoke:desktop:built",
+    "smoke:release:target": "npm run lint && npm run build && npm run smoke:buttons && npm run smoke && npm run smoke:persistence && npm run smoke:upload && npm run smoke:documents && npm run smoke:directory && npm run smoke:onboarding && npm run smoke:ocr:real && npm run smoke:security && npm run smoke:ai-tools && npm run smoke:local-action-token && npm run smoke:mcp:writes && npm run smoke:embedding-provider && npm run smoke:anythingllm && npm run smoke:anythingllm-desktop && npm run smoke:jobs && npm run smoke:ui:built && npm run smoke:desktop:data-dir:built && npm run smoke:desktop:built && npm run dist:win:built && npm run smoke:desktop:packaged && npm run smoke:release:artifacts",
+    "preview": "vite preview --host 127.0.0.1 --port 5185"
+  },
+  "build": {
+    "appId": "com.vectorforge.desktop",
+    "productName": "Vector Forge Desktop",
+    "asar": false,
+    "electronDist": "./node_modules/electron/dist",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "dist/**/*",
+      "dist-server/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "eng.traineddata",
+        "to": "ocr/eng.traineddata"
+      },
+      {
+        "from": "chi_sim.traineddata",
+        "to": "ocr/chi_sim.traineddata"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "artifactName": "${productName}-Setup-${version}-${arch}.${ext}",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "portable": {
+      "artifactName": "${productName}-Portable-${version}-${arch}.${ext}"
+    }
+  },
+  "dependencies": {
+    "@lancedb/lancedb": "^0.30.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@napi-rs/canvas": "^1.0.0",
+    "@vitejs/plugin-react": "^6.0.1",
+    "apache-arrow": "^18.1.0",
+    "concurrently": "^10.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "lucide-react": "^1.21.0",
+    "mammoth": "^1.12.0",
+    "mime-types": "^3.0.2",
+    "multer": "^2.2.0",
+    "pdf-parse": "^2.4.5",
+    "pdfjs-dist": "^6.0.227",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "tesseract.js": "^7.0.0",
+    "tsx": "^4.22.4",
+    "typescript": "~6.0.2",
+    "uuid": "^14.0.1",
+    "vite": "^8.0.12",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/mime-types": "^3.0.1",
+    "@types/multer": "^2.1.0",
+    "@types/node": "^24.13.2",
+    "@types/pdfkit": "^0.17.6",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/uuid": "^10.0.0",
+    "electron": "^42.5.0",
+    "electron-builder": "^26.15.3",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "jszip": "^3.10.1",
+    "pdfkit": "^0.19.1",
+    "typescript-eslint": "^8.59.2",
+    "wait-on": "^9.0.10"
+  }
+}
