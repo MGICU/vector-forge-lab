@@ -33,7 +33,7 @@ import "./styles.css";
 type EmbeddingProviderType = "local-hash" | "openai-compatible";
 type OcrMode = "auto" | "tesseract" | "paddleocr" | "cloud";
 type DuplicateStrategy = "skip" | "version" | "replace";
-type ParserType = "text" | "html" | "json" | "csv" | "pdf-text" | "pdf-ocr" | "docx" | "image-ocr" | "unknown";
+type ParserType = "text" | "html" | "json" | "csv" | "pdf-text" | "pdf-ocr" | "docx" | "xlsx" | "pptx" | "image-ocr" | "unknown";
 type DocumentStatus = "pending" | "extracting" | "ocr" | "chunking" | "embedding" | "indexed" | "failed" | "skipped";
 type Tone = "neutral" | "good" | "warn" | "bad" | "active";
 type SectionId = "overview" | "ai" | "collections" | "search" | "jobs" | "documents" | "parsers" | "mcp" | "anythingllm" | "settings";
@@ -571,6 +571,8 @@ const parserLabel: Record<string, string> = {
   "pdf-text": "PDF 文本",
   "pdf-ocr": "PDF OCR",
   docx: "DOCX",
+  xlsx: "XLSX",
+  pptx: "PPTX",
   "image-ocr": "图片",
   unknown: "未知",
 };
@@ -3282,7 +3284,7 @@ function MetricGrid(props: { collections: number; documents: number; chunks: num
   return (
     <section className="metric-grid">
       <MetricCard color="blue" label="知识库" value={String(props.collections)} caption="创建时复制默认参数" />
-      <MetricCard color="green" label="文档" value={String(props.documents)} caption="PDF / DOCX / 图片" />
+      <MetricCard color="green" label="文档" value={String(props.documents)} caption="PDF / DOCX / XLSX / PPTX / 图片" />
       <MetricCard color="violet" label="Chunks" value={formatCount(props.chunks)} caption="LanceDB 已索引" />
       <MetricCard color="orange" label="任务" value={String(props.runningJobs)} caption={props.failedDocuments ? `${props.failedDocuments} 个失败需处理` : "OCR 队列运行中"} />
     </section>

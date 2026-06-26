@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="256" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4c1d95"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="crystalGrad" x1="0" y1="0" x2="256" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#c4b5fd"/>
+      <stop offset="40%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="bookLeft" x1="0" y1="0" x2="128" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="bookRight" x1="256" y1="0" x2="128" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="spineGrad" x1="128" y1="60" x2="128" y2="196" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#c4b5fd"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect x="0" y="0" width="256" height="256" rx="56" fill="url(#bgGrad)"/>
+
+  <!-- Subtle inner glow -->
+  <rect x="8" y="8" width="240" height="240" rx="48" fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.15"/>
+
+  <!-- Open book: left page -->
+  <path d="M128 68 L44 48 Q36 44 32 52 L32 180 Q28 172 36 164 L112 144 Q120 140 128 136 Z"
+        fill="url(#bookLeft)" opacity="0.9"/>
+  <!-- Left page highlight -->
+  <path d="M128 68 L112 144 Q120 140 128 136 Z"
+        fill="#c4b5fd" opacity="0.3"/>
+
+  <!-- Open book: right page -->
+  <path d="M128 68 L212 48 Q220 44 224 52 L224 180 Q228 172 220 164 L144 144 Q136 140 128 136 Z"
+        fill="url(#bookRight)" opacity="0.9"/>
+  <!-- Right page highlight -->
+  <path d="M128 68 L144 144 Q136 140 128 136 Z"
+        fill="#c4b5fd" opacity="0.3"/>
+
+  <!-- Book spine -->
+  <rect x="122" y="66" width="12" height="132" rx="3" fill="url(#spineGrad)" opacity="0.7"/>
+
+  <!-- Faceted crystal rising from book center -->
+  <!-- Crystal: central diamond/crystal shape -->
+  <path d="M128 108 L100 82 Q101 80 104 82 L128 64 L152 82 Q155 80 156 82 L128 108 Z"
+        fill="url(#crystalGrad)" opacity="0.95"/>
+  <!-- Crystal lower facet -->
+  <path d="M100 82 L104 82 L128 64 L128 108 Z"
+        fill="#c4b5fd" opacity="0.5"/>
+  <!-- Crystal right facet -->
+  <path d="M128 64 L152 82 L156 82 L128 108 Z"
+        fill="#5b21b6" opacity="0.35"/>
+  <!-- Crystal top spark -->
+  <path d="M128 56 L124 62 L128 64 L132 62 Z"
+        fill="#ddd6fe" opacity="0.8"/>
+
+  <!-- Subtle forge sparks around crystal -->
+  <circle cx="148" cy="76" r="3" fill="#c4b5fd" opacity="0.7"/>
+  <circle cx="108" cy="74" r="2" fill="#c4b5fd" opacity="0.6"/>
+  <circle cx="138" cy="60" r="2.5" fill="#ddd6fe" opacity="0.7"/>
+  <circle cx="118" cy="58" r="2" fill="#ddd6fe" opacity="0.5"/>
+  <circle cx="152" cy="92" r="2" fill="#a78bfa" opacity="0.5"/>
+  <circle cx="104" cy="90" r="2.5" fill="#a78bfa" opacity="0.4"/>
+
+  <!-- Bottom page lines (suggesting layered knowledge) -->
+  <path d="M60 196 Q68 188 128 178 Q188 188 196 196"
+        fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.4"/>
+  <path d="M56 204 Q68 196 128 186 Q188 196 200 204"
+        fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.3"/>
+</svg>

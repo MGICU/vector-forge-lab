@@ -63,6 +63,7 @@
   },
   "build": {
     "appId": "com.KnowledgeForge.desktop",
+    "icon": "assets/icon.ico",
     "productName": "Knowledge Forge",
     "asar": false,
     "electronDist": "./node_modules/electron/dist",
@@ -165,6 +166,7 @@
     "globals": "^17.6.0",
     "jszip": "^3.10.1",
     "pdfkit": "^0.19.1",
+    "sharp": "^0.35.2",
     "typescript-eslint": "^8.59.2",
     "wait-on": "^9.0.10"
   }

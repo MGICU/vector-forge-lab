@@ -279,3 +279,30 @@ Selected smoke evidence:
 - `0.1.0`: initial Web/API/MCP local vector database with LanceDB, local-hash embeddings, text/file upload, document management, search, and basic AnythingLLM upload.
 - `0.2.0`: added PDF/DOCX/image OCR parsing, async jobs, document preview/reprocess, OCR config, and a more practical knowledge-base workbench UI.
 - `0.2.1`: added the knowledge-base-first UI iteration, AI command console, collection-scoped parameters, document details, batch actions, MCP resources, AnythingLLM idempotent sync, and stronger security smoke.
+## v0.3.4 (2026-06-26)
+
+### Changes
+- README screenshots: 8 UI screenshots added to both English and Chinese READMEs
+- GitHub About description fixed (was garbled Chinese, now clean English)
+- GitHub topics added: knowledge-base, vector-search, rag, local-first, mcp, lancedb, ocr, electron, anythingllm, desktop-app
+- Version bumped from 0.3.3 to 0.3.4
+- Windows EXE rebuilt and security-audited (no secrets leaked)
+
+### Smoke Status
+- All 15 smoke suites passing: core, security, AI tools, jobs, embedding, upload, documents, OCR, MCP write, persistence, AnythingLLM sync, AnythingLLM desktop, local action token, directory, onboarding
+- Button audit: 114 buttons, 0 issues
+
+### Delivery Artifacts
+- `release/Knowledge Forge-Setup-0.3.4-x64.exe` (225 MB)
+- `release/Knowledge Forge-Portable-0.3.4-x64.exe` (225 MB)
+- `release/Knowledge Forge-0.3.4-x64.zip` (304 MB)
+- `release/win-unpacked/Knowledge Forge.exe`
+
+### Remaining Gaps
+- App icon is still the default Electron icon (agent working on this)
+- No responsive CSS / mobile layout (agent working on this)
+- XLSX not in file input accept list (agent working on this)
+- Data-directory switching remains startup-bound
+- AI control is deterministic command router, not model-backed planner
+- asar remains disabled for LanceDB/OCR compatibility
+
