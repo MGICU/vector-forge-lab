@@ -1,7 +1,7 @@
 {
   "name": "knowledge-forge",
   "private": true,
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Local knowledge base, vector search, OCR, MCP, and optional AnythingLLM desktop integration.",
   "keywords": [
     "local-first",

@@ -1,6 +1,6 @@
 ﻿# Knowledge Forge
 
-Version: `0.3.4`
+Version: `0.5.0`
 
 Knowledge Forge is a local-first knowledge base for people who want to turn messy files into searchable AI-ready memory without handing every document to a cloud service.
 
@@ -239,7 +239,7 @@ High-impact next slices:
 
 ## Status
 
-`0.3.4` is an active preview. Core local ingestion, OCR, vector search, MCP read access, AnythingLLM sync, and Windows desktop packaging workflows are implemented; APIs and UX may continue to change before a stable release.
+`0.5.0` is an active preview. Core local ingestion, OCR, vector search, MCP read access, AnythingLLM sync, and Windows desktop packaging workflows are implemented; APIs and UX may continue to change before a stable release.
 
 The current design priority is practical reliability: every visible button should either perform a real action, open a confirmation, show a clear disabled reason, or be covered by smoke tests.
 
